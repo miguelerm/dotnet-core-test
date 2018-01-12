@@ -43,6 +43,16 @@ namespace mvc_test
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+
+                routes.MapRoute(
+                    name: "blog",
+                    template: "blog/{year:int}/{month:int}/{day:int}",
+                    defaults: new { controller = "Home", action = "Blog" });
+
+                routes.MapRoute(
+                    name: "blog2",
+                    template: "blog/{category}/{subcategory}/{article}",
+                    defaults: new { controller = "Home", action = "BlogArticle" });
             });
         }
     }
