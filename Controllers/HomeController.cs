@@ -41,6 +41,11 @@ namespace mvc_test.Controllers
             return Content($"{category}/{subcategory}/{article}");
         }
 
+        public IActionResult BlogMakeModel(string make, string model, string zipCode) {
+            var today = DateTime.Today;
+            return Content($"Make: {make}; Model: {model}; zipCode: {zipCode} ({today:dd-yyyy-MM})");
+        }
+
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";

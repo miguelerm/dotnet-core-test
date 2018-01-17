@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using mvc_test.Constraints;
 
 namespace mvc_test
 {
@@ -50,9 +51,16 @@ namespace mvc_test
                     defaults: new { controller = "Home", action = "Blog" });
 
                 routes.MapRoute(
+                    name: "blog3",
+                    template: "blog/{make}/{model}/{zipcode}",
+                    defaults: new { controller = "Home", action = "BlogMakeModel" },
+                    constraints: new { make = new MakeRouteConstraint()  });
+
+                routes.MapRoute(
                     name: "blog2",
                     template: "blog/{category}/{subcategory}/{article}",
                     defaults: new { controller = "Home", action = "BlogArticle" });
+
             });
         }
     }
