@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using mvc_test.Models;
+using mvc_test.Filters;
 
 namespace mvc_test.Controllers
 {
@@ -41,9 +43,11 @@ namespace mvc_test.Controllers
             return Content($"{category}/{subcategory}/{article}");
         }
 
+        [LogActionFilter]
+        [HighLightToyotaFilter]
         public IActionResult BlogMakeModel(string make, string model, string zipCode) {
-            var today = DateTime.Today;
-            return Content($"Make: {make}; Model: {model}; zipCode: {zipCode} ({today:dd-yyyy-MM})");
+            var today = DateTime.Now;
+            return Content($"Make: {make}; Model: {model}; zipCode: {zipCode} ({today:dd-yyyy-MM HH:mm:ss})");
         }
 
         public IActionResult About()
