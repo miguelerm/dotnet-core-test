@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using mvc_test.Models;
 using mvc_test.Filters;
+using mvc_test.Services;
 
 namespace mvc_test.Controllers
 {
@@ -48,6 +49,14 @@ namespace mvc_test.Controllers
         public IActionResult BlogMakeModel(string make, string model, string zipCode) {
             var today = DateTime.Now;
             return Content($"Make: {make}; Model: {model}; zipCode: {zipCode} ({today:dd-yyyy-MM HH:mm:ss})");
+        }
+
+
+        public IActionResult CrearEmpleado([FromBody] EmpleadoViewModel viewModel)
+        {
+            var empleados = new EmpleadoService();
+            var id = empleados.Crear(viewModel);
+            return Ok(id);
         }
 
         public IActionResult About()
