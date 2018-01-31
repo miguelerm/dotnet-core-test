@@ -1,4 +1,5 @@
 using System;
+using mvc_test.Extensions;
 using mvc_test.Models;
 
 namespace mvc_test.Services {
@@ -6,11 +7,9 @@ namespace mvc_test.Services {
     public class EmpleadoService
     {
 
-        public uint Crear(EmpleadoViewModel model)
+        public uint Crear(EmpleadoViewModel empleado)
         {
-            var edad = DateTime.Today - model.FechaNacimiento.Value;
-            var anios = edad.TotalDays / 365;
-            if (anios < 18)
+            if (empleado.EsMayorDeEdad())
                 return 0;
             else
                 return 1;

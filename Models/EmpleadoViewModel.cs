@@ -15,6 +15,7 @@ namespace mvc_test.Models {
         public DateTime? FechaNacimiento { get; set; }
 
         public IEnumerable<long> Telefonos { get; set; }
+
     }
 
 }

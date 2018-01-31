@@ -42,7 +42,6 @@ namespace mvc_test
 
             app.UseStaticFiles();
 
-            
             app.UseMvc(routes =>
             {
                 
