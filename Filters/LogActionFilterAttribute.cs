@@ -13,6 +13,7 @@ namespace mvc_test.Filters {
 
         public void OnActionExecuting(ActionExecutingContext context)
         {
+            //context.Result = new RedirectResult("http://www.google.com.gt");
             Debug.WriteLine("Ejecutando el action...");
         }
     }

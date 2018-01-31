@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using mvc_test.Models;
 using mvc_test.Filters;
 using mvc_test.Services;
+using System.Collections;
 
 namespace mvc_test.Controllers
 {
@@ -44,7 +45,7 @@ namespace mvc_test.Controllers
             return Content($"{category}/{subcategory}/{article}");
         }
 
-        [LogActionFilter]
+        //[LogActionFilter]
         [HighLightToyotaFilter]
         public IActionResult BlogMakeModel(string make, string model, string zipCode) {
             var today = DateTime.Now;
@@ -54,9 +55,22 @@ namespace mvc_test.Controllers
 
         public IActionResult CrearEmpleado([FromBody] EmpleadoViewModel viewModel)
         {
+            // TODO: convertir la validacion a un global filter
+            if (!ModelState.IsValid) {
+                return BadRequest(ModelState);
+            }
+
             var empleados = new EmpleadoService();
             var id = empleados.Crear(viewModel);
-            return Ok(id);
+
+            var sucess = id > 0;
+            var message = sucess ? "OK": "KO";
+
+            var result = new EmpleadoCreadoViewModel(sucess) {
+                Message = message
+            };
+
+            return Ok(result);
         }
 
         public IActionResult About()

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using mvc_test.Constraints;
+using mvc_test.Filters;
 
 namespace mvc_test
 {
@@ -22,7 +23,9 @@ namespace mvc_test
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc(config => {
+                config.Filters.Add(typeof(LogActionFilterAttribute));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,8 +42,10 @@ namespace mvc_test
 
             app.UseStaticFiles();
 
+            
             app.UseMvc(routes =>
             {
+                
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
