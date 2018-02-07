@@ -55,11 +55,6 @@ namespace mvc_test.Controllers
 
         public IActionResult CrearEmpleado([FromBody] EmpleadoViewModel viewModel)
         {
-            // TODO: convertir la validacion a un global filter
-            if (!ModelState.IsValid) {
-                return BadRequest(ModelState);
-            }
-
             var empleados = new EmpleadoService();
             var id = empleados.Crear(viewModel);
 

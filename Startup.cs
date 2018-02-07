@@ -25,6 +25,7 @@ namespace mvc_test
         {
             services.AddMvc(config => {
                 config.Filters.Add(typeof(LogActionFilterAttribute));
+                config.Filters.Add(typeof(BadRequestfilterAttribute));
             });
         }
 
